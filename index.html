@@ -1,94 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>Watch Video</title>
 
-<title>Continue to Official Streaming Page</title>
-<meta name="description" content="Access an official external streaming page through this verified access portal.">
+<meta name="theme-color" content="#000000">
 
-<link rel="stylesheet" href="../assets/style.css">
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#000;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Arial;
+}
+
+.video-container{
+width:100%;
+max-width:900px;
+position:relative;
+}
+
+video{
+width:100%;
+height:auto;
+background:#000;
+border-radius:8px;
+}
+
+.play-btn{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:rgba(0,0,0,0.6);
+border-radius:50%;
+width:80px;
+height:80px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:30px;
+cursor:pointer;
+}
+
+</style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header class="site-header">
-  <div class="header-inner">
-    <div class="brand">Playnaw<span>Access</span></div>
-    <nav class="nav">
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-    </nav>
-  </div>
-</header>
+<div class="video-container">
 
-<!-- MAIN -->
-<main class="main">
+<video id="player" playsinline></video>
 
-  <div class="breadcrumb">
-    Home / Content Access
-  </div>
+<div class="play-btn" id="play">▶</div>
 
-  <article class="article-card">
+</div>
 
-    <h1 class="article-title">
-      Continue to Official Streaming Page
-    </h1>
+<script>
 
-    <div class="article-content">
-      <p>
-        You are about to visit an official external streaming page.
-        This access page is provided to help users reach verified
-        content sources safely and transparently.
-      </p>
-    </div>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
-    <!-- CONTENT BOX -->
-    <div class="action-box" style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+if(id){
 
-      <!-- POSTER -->
-      <div style="max-width:220px;">
-        <img
-          src="https://cdn.aceimg.com/8e9891273.png"
-          alt="Streaming Content Poster"
-          style="width:100%; border-radius:10px; box-shadow:0 10px 20px rgba(0,0,0,.15);">
-      </div>
+const video = document.getElementById("player");
 
-      <!-- TEXT + BUTTON -->
-      <div style="flex:1; min-width:220px;">
-        <h2 style="margin-top:0;">Streaming Content Access</h2>
+video.src = "https://cdn2.videy.co/" + id + ".mp4";
 
-        <p>
-          This page serves as a gateway to an external streaming platform.
-          All content is hosted and managed by the destination website.
-          Please proceed only if you trust the source.
-        </p>
+}
 
-        <a class="action-btn"
-           href="https://teest.videoy.online/pages/watch.html?id=v64"
-           target="_blank"
-           rel="nofollow noopener">
-           Continue to Streaming Site
-        </a>
+// autoplay saat klik
+const video = document.getElementById("player");
+const playBtn = document.getElementById("play");
 
-        <div class="notice">
-          You will be redirected to an external website.
-        </div>
-      </div>
+playBtn.onclick = function(){
 
-    </div>
+video.play();
 
-  </article>
+playBtn.style.display="none";
 
-</main>
+}
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  © 2026 · Playnaw Access ·
-  <a href="/privacy.html">Privacy</a> ·
-  <a href="/terms.html">Terms</a>
-</footer>
+// redirect setelah selesai
+video.onended = function(){
+
+window.location.href="https://google.com";
+
+}
+
+</script>
 
 </body>
 </html>

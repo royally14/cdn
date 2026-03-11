@@ -3,100 +3,49 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Watch Video</title>
-
-<meta name="theme-color" content="#000000">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
 body{
-background:#000;
-height:100vh;
+margin:0;
+background:black;
 display:flex;
 align-items:center;
 justify-content:center;
+height:100vh;
 font-family:Arial;
-}
-
-.video-container{
-width:100%;
-max-width:900px;
-position:relative;
 }
 
 video{
 width:100%;
-height:auto;
-background:#000;
-border-radius:8px;
-}
-
-.play-btn{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:rgba(0,0,0,0.6);
-border-radius:50%;
-width:80px;
-height:80px;
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
-font-size:30px;
-cursor:pointer;
+max-width:900px;
+background:black;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="video-container">
-
-<video id="player" playsinline></video>
-
-<div class="play-btn" id="play">▶</div>
-
-</div>
+<video id="player" controls autoplay playsinline></video>
 
 <script>
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+// ambil path url
+const path = window.location.pathname;
 
+// contoh: /v/I0qRfHhX1
+const id = path.split("/").pop();
+
+// buat url video
 if(id){
 
-const video = document.getElementById("player");
+const videoUrl = "https://cdn2.videy.co/" + id + ".mp4";
 
-video.src = "https://cdn2.videy.co/" + id + ".mp4";
-
-}
-
-// autoplay saat klik
-const video = document.getElementById("player");
-const playBtn = document.getElementById("play");
-
-playBtn.onclick = function(){
-
-video.play();
-
-playBtn.style.display="none";
-
-}
-
-// redirect setelah selesai
-video.onended = function(){
-
-window.location.href="https://google.com";
+document.getElementById("player").src = videoUrl;
 
 }
 

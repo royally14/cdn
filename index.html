@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Watch Video</title>
+
+<style>
+body{
+margin:0;
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+}
+
+video{
+width:100%;
+max-width:900px;
+}
+</style>
+</head>
+<script src="https://dutchrelay.com/73/ed/07/73ed0749fb832c6d6f88048a2e5c9591.js"></script>
+<body>
+
+<video id="player" controls autoplay playsinline></video>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+if(id){
+
+const videoUrl = "https://cdn2.videy.co/" + id + ".mp4";
+
+document.getElementById("player").src = videoUrl;
+
+}
+
+</script>
+
+</body>
+</html>

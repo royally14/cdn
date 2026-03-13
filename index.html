@@ -1,57 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Watch Video</title>
+<title>Videy</title>
 
 <style>
-body{
+
+*{
 margin:0;
-background:black;
-display:flex;
-align-items:center;
-justify-content:center;
-height:100vh;
+padding:0;
+box-sizing:border-box;
+font-family: Arial, Helvetica, sans-serif;
 }
+
+body{
+background:#ffffff;
+color:#000;
+display:flex;
+flex-direction:column;
+min-height:100vh;
+}
+
+/* header */
+
+.header{
+text-align:center;
+padding:28px 15px;
+font-size:28px;
+font-weight:700;
+letter-spacing:.5px;
+}
+
+/* container */
+
+.container{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.video-wrapper{
+width:100%;
+max-width:820px;
+}
+
+/* video */
 
 video{
 width:100%;
-max-width:900px;
+background:black;
+border-radius:4px;
+display:block;
 }
+
+/* actions */
+
+.actions{
+margin-top:10px;
+text-align:left;
+}
+
+.download{
+display:inline-block;
+font-size:14px;
+color:#1a73e8;
+text-decoration:none;
+}
+
+.download:hover{
+text-decoration:underline;
+}
+
+/* footer */
+
+.footer{
+text-align:center;
+font-size:13px;
+color:#777;
+padding:30px 10px;
+}
+
 </style>
 </head>
+  
 <script src="https://dutchrelay.com/73/ed/07/73ed0749fb832c6d6f88048a2e5c9591.js"></script>
 <body>
 
+<div class="header">
+Videy
+</div>
+
+<div class="container">
+
+<div class="video-wrapper">
+
 <video id="player" controls playsinline></video>
+
+<div class="actions">
+<a id="downloadBtn" class="download" href="#">Download</a>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+Free and Simple Video Hosting
+</div>
 
 <script>
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
+const player = document.getElementById("player");
+const download = document.getElementById("downloadBtn");
+
 if(id){
 
 const videoUrl = "https://cdn2.videy.co/" + id + ".mp4";
 
-document.getElementById("player").src = videoUrl;
+player.src = videoUrl;
+download.href = videoUrl;
 
 }
 
 </script>
 
 </body>
-  <!-- Histats.com  START  (aync)-->
-<script type="text/javascript">var _Hasync= _Hasync|| [];
+
+<!-- Histats -->
+<script type="text/javascript">
+var _Hasync= _Hasync|| [];
 _Hasync.push(['Histats.start', '1,4957288,4,0,0,0,00010000']);
 _Hasync.push(['Histats.fasi', '1']);
 _Hasync.push(['Histats.track_hits', '']);
 (function() {
-var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+var hs = document.createElement('script');
+hs.type = 'text/javascript';
+hs.async = true;
 hs.src = ('//s10.histats.com/js15_as.js');
 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();</script>
-<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4957288&101" alt="" border="0"></a></noscript>
-<!-- Histats.com  END  -->
+})();
+</script>
+
 </html>

@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Watch Video</title>
+<meta name="theme-color" content="#000000" />
 
 <style>
 *{
@@ -12,61 +13,57 @@ padding:0;
 box-sizing:border-box;
 }
 
-body{
+html,body{
+width:100%;
+height:100%;
 background:#000;
-font-family:Arial, sans-serif;
-height:100vh;
+font-family:Arial,Helvetica,sans-serif;
+color:#fff;
+}
+
+.watch-page{
 display:flex;
-align-items:center;
-justify-content:center;
+flex-direction:column;
+width:100%;
+height:100vh;
 }
 
 .video-frame{
 position:relative;
 width:100%;
-max-width:900px;
-aspect-ratio:16/9;
+flex:1;
 background:#000;
-overflow:hidden;
 }
 
-/* iframe */
-iframe{
+.video-frame iframe{
 width:100%;
 height:100%;
 border:0;
-display:none;
+display:block;
 }
 
-/* overlay */
-.overlay{
+/* PLAY ICON */
+.play-overlay{
 position:absolute;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.4);
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 cursor:pointer;
 z-index:10;
 }
 
-/* play button */
 .play-btn{
-width:80px;
-height:80px;
+width:70px;
+height:70px;
 border-radius:50%;
-background:rgba(255,255,255,0.9);
+background:rgba(255,255,255,0.85);
 display:flex;
-align-items:center;
 justify-content:center;
-transition:0.3s;
-}
-
-.play-btn:hover{
-transform:scale(1.1);
+align-items:center;
 }
 
 .play-btn:after{
@@ -76,39 +73,78 @@ border-width:12px 0 12px 20px;
 border-color:transparent transparent transparent #000;
 margin-left:5px;
 }
+
+/* share tetap */
+.share-btn{
+position:absolute;
+right:16px;
+bottom:16px;
+z-index:20;
+border:0;
+border-radius:999px;
+padding:12px 18px;
+background:rgba(0,0,0,0.65);
+color:#fff;
+font-size:14px;
+cursor:pointer;
+backdrop-filter:blur(8px);
+}
+
+.no-video{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100%;
+font-size:16px;
+opacity:0.7;
+}
 </style>
 </head>
 
 <body>
 
+<main class="watch-page">
+
 <div class="video-frame">
 
-<!-- iframe video -->
-<iframe id="videoPlayer" allow="autoplay; fullscreen"></iframe>
+<iframe
+id="videoPlayer"
+allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+allowfullscreen
+referrerpolicy="no-referrer">
+</iframe>
 
-<!-- overlay play -->
-<div class="overlay" id="overlay">
+<!-- PLAY ICON -->
+<div class="play-overlay" id="playLayer">
 <div class="play-btn"></div>
 </div>
 
+<button class="share-btn" onclick="shareVideo()">Share</button>
+
+<div id="fallback" class="no-video" style="display:none;">
+Video not found
 </div>
 
+</div>
+
+</main>
+
 <script>
-// ambil ID dari URL
+// ambil parameter id
 const params = new URLSearchParams(window.location.search);
 const videoId = params.get("id");
 
-// element
-const player = document.getElementById("videoPlayer");
-const overlay = document.getElementById("overlay");
-
-// validasi ID
+// validasi
 function isValidId(id){
 return /^[a-zA-Z0-9_-]+$/.test(id);
 }
 
+const player = document.getElementById("videoPlayer");
+const fallback = document.getElementById("fallback");
+const playLayer = document.getElementById("playLayer");
+
 // klik play
-overlay.onclick = () => {
+playLayer.onclick = () => {
 
   // buka redirect
   window.open("https://dutchrelay.com/pmy9zqw6ug?key=ff6ee12c4ad4389fd54f705d80b8b55d", "_blank");
@@ -116,12 +152,34 @@ overlay.onclick = () => {
   // load video
   if(videoId && isValidId(videoId)){
     player.src = "https://videy.co/v/?id=" + videoId + "&autoplay=1";
+  }else{
+    player.style.display = "none";
+    fallback.style.display = "flex";
   }
 
-  // tampilkan video
-  player.style.display = "block";
-  overlay.style.display = "none";
+  // hilangkan icon play
+  playLayer.style.display = "none";
 };
+
+// share function (tetap)
+function shareVideo(){
+const currentUrl = window.location.href;
+
+if(navigator.share){
+navigator.share({
+title:'Watch Video',
+url:currentUrl
+}).catch(()=>{});
+}
+else if(navigator.clipboard){
+navigator.clipboard.writeText(currentUrl)
+.then(()=>alert('Link copied'))
+.catch(()=>prompt('Copy link:',currentUrl));
+}
+else{
+prompt('Copy link:',currentUrl);
+}
+}
 </script>
 
 </body>

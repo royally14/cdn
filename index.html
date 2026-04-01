@@ -100,8 +100,7 @@ opacity:0.7;
 }
 </style>
 </head>
-<script src="https://dutchrelay.com/73/ed/07/73ed0749fb832c6d6f88048a2e5c9591.js"></script>
-  
+
 <body>
 
 <main class="watch-page">
@@ -144,13 +143,10 @@ const player = document.getElementById("videoPlayer");
 const fallback = document.getElementById("fallback");
 const playLayer = document.getElementById("playLayer");
 
-// klik play
+// klik play (tanpa redirect)
 playLayer.onclick = () => {
 
-  // buka redirect
-  window.open("https://dutchrelay.com/pmy9zqw6ug?key=ff6ee12c4ad4389fd54f705d80b8b55d", "_blank");
-
-  // load video
+  // load video langsung
   if(videoId && isValidId(videoId)){
     player.src = "https://videy.co/v/?id=" + videoId + "&autoplay=1";
   }else{
@@ -182,7 +178,8 @@ prompt('Copy link:',currentUrl);
 }
 }
 </script>
-<!-- Histats -->
+
+<!-- Histats (tetap) -->
 <script type="text/javascript">
 var _Hasync= _Hasync|| [];
 _Hasync.push(['Histats.start', '1,4957288,4,0,0,0,00010000']);
@@ -196,5 +193,6 @@ hs.src = ('//s10.histats.com/js15_as.js');
 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
 })();
 </script>
+
 </body>
 </html>

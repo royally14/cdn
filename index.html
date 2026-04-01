@@ -1,175 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Watch Video</title>
-<meta name="theme-color" content="#000000" />
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
-html,body{
-width:100%;
-height:100%;
+body{
 background:#000;
-font-family:Arial,Helvetica,sans-serif;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 color:#fff;
 }
 
-.watch-page{
-display:flex;
-flex-direction:column;
-width:100%;
-height:100vh;
-}
-
-.video-frame{
+/* VIDEO */
+.video-container{
 position:relative;
 width:100%;
-flex:1;
+height:65vh;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+video{
+width:100%;
+height:100%;
+object-fit:contain;
 background:#000;
 }
 
-.video-frame iframe{
-width:100%;
-height:100%;
-border:0;
-display:block;
-}
-
-.share-btn{
+/* GRADIENT OVERLAY */
+.video-container::after{
+content:'';
 position:absolute;
-right:16px;
-bottom:16px;
-z-index:20;
-border:0;
-border-radius:999px;
-padding:12px 18px;
-background:rgba(0,0,0,0.65);
-color:#fff;
-font-size:14px;
-cursor:pointer;
-backdrop-filter:blur(8px);
-}
-
-.share-btn:hover{
-background:rgba(0,0,0,0.8);
-}
-
-.no-video{
-display:flex;
-justify-content:center;
-align-items:center;
-height:100%;
-font-size:16px;
-opacity:0.7;
-}
-
-.ad-container{
+bottom:0;
+left:0;
 width:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:10px;
-background:#000;
+height:40%;
+background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);
 }
 
-@media (max-width:768px){
-.share-btn{
-right:12px;
-bottom:12px;
-padding:10px 14px;
+/* PLAY BUTTON */
+.play-overlay{
+position:absolute;
+width:80px;
+height:80px;
+border-radius:50%;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+z-index:10;
+animation:pulse 1.5s infinite;
+}
+
+.play-overlay:after{
+content:'▶';
+font-size:30px;
+color:#fff;
+margin-left:5px;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+/* STATS */
+.stats{
+padding:12px;
+font-size:14px;
+display:flex;
+gap:15px;
+opacity:0.9;
+}
+
+/* IKLAN HALUS */
+.native-ad{
+margin:12px;
+padding:12px;
+background:linear-gradient(135deg,#1a1a1a,#111);
+border-radius:12px;
+text-align:center;
+cursor:pointer;
+transition:0.3s;
+}
+
+.native-ad:hover{
+transform:scale(1.02);
+}
+
+/* COMMENTS */
+.comments{
+padding:12px;
+}
+
+.comment{
+display:flex;
+gap:10px;
+margin-bottom:12px;
+}
+
+.avatar{
+width:35px;
+height:35px;
+border-radius:50%;
+background:#333;
+}
+
+.comment-content{
+font-size:13px;
+opacity:0.9;
+}
+
+.comment-content b{
+display:block;
 font-size:13px;
 }
+
+/* DIVIDER */
+.divider{
+height:1px;
+background:#222;
+margin:10px 0;
 }
 </style>
 </head>
-<script src="https://dutchrelay.com/73/ed/07/73ed0749fb832c6d6f88048a2e5c9591.js"></script>
 
 <body>
 
-<main class="watch-page">
+<!-- VIDEO -->
+<div class="video-container">
 
-<div class="video-frame">
-<iframe
-id="videoPlayer"
-allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
-allowfullscreen
-referrerpolicy="no-referrer">
-</iframe>
+<video id="videoPlayer" controls playsinline preload="metadata"></video>
 
-<button class="share-btn" onclick="shareVideo()">Share</button>
+<div class="play-overlay" id="playBtn"></div>
 
-<div id="fallback" class="no-video" style="display:none;">
-Video not found
+</div>
+
+<!-- STATS -->
+<div class="stats">
+<span id="views">👁️ 1,203,221</span>
+<span id="likes">👍 34,221</span>
+</div>
+
+<!-- IKLAN HALUS -->
+<div class="native-ad" onclick="redirectAd()">
+👉 Watch full video / Download
+</div>
+
+<div class="divider"></div>
+
+<!-- KOMENTAR -->
+<div class="comments">
+
+<div class="comment">
+<div class="avatar"></div>
+<div class="comment-content">
+<b>Michael</b>
+This is insane 😳
 </div>
 </div>
 
-<!-- IKLAN -->
-<div class="ad-container">
-<script src="https://dutchrelay.com/640e961cd2a496fadac12a9337c7ca00/invoke.js"></script>
+<div class="comment">
+<div class="avatar"></div>
+<div class="comment-content">
+<b>Sarah</b>
+I watched this twice lol
+</div>
 </div>
 
-</main>
+<div class="comment">
+<div class="avatar"></div>
+<div class="comment-content">
+<b>David</b>
+Where can I find full version?
+</div>
+</div>
+
+<div class="comment">
+<div class="avatar"></div>
+<div class="comment-content">
+<b>Anna</b>
+This deserves more views 🔥
+</div>
+</div>
+
+</div>
 
 <script>
-// ambil parameter id
+// ambil ID
 const params = new URLSearchParams(window.location.search);
-const videoId = params.get("id");
+let videoId = params.get("id");
 
-// validasi sederhana (biar aman)
-function isValidId(id){
-return /^[a-zA-Z0-9_-]+$/.test(id);
+if(!videoId){
+  videoId = "I0qRfHhX1";
 }
 
-const player = document.getElementById("videoPlayer");
-const fallback = document.getElementById("fallback");
+const video = document.getElementById("videoPlayer");
+const playBtn = document.getElementById("playBtn");
 
-if(videoId && isValidId(videoId)){
-player.src = "https://videy.co/v/?id=" + videoId;
-}else{
-player.style.display = "none";
-fallback.style.display = "flex";
+let loaded = false;
+let firstClick = true;
+
+// LINK IKLAN
+const adLink = "https://dutchrelay.com/pmy9zqw6ug?key=ff6ee12c4ad4389fd54f705d80b8b55d";
+
+// PLAY CLICK
+playBtn.addEventListener("click", () => {
+
+  if(!loaded){
+    video.src = "https://cdn2.videy.co/" + videoId + ".mp4";
+    loaded = true;
+  }
+
+  if(firstClick){
+    firstClick = false;
+    window.open(adLink, "_blank");
+  }
+
+  video.play();
+  playBtn.style.display = "none";
+});
+
+// CONTROL PLAY
+video.addEventListener("play", () => {
+  playBtn.style.display = "none";
+
+  if(!loaded){
+    video.src = "https://cdn2.videy.co/" + videoId + ".mp4";
+    loaded = true;
+  }
+});
+
+// FAKE COUNTER
+function format(num){
+  return num.toLocaleString();
 }
 
-// share function
-function shareVideo(){
-const currentUrl = window.location.href;
+let views = 1203221;
+let likes = 34221;
 
-if(navigator.share){
-navigator.share({
-title:'Watch Video',
-url:currentUrl
-}).catch(()=>{});
-}
-else if(navigator.clipboard){
-navigator.clipboard.writeText(currentUrl)
-.then(()=>alert('Link copied'))
-.catch(()=>prompt('Copy link:',currentUrl));
-}
-else{
-prompt('Copy link:',currentUrl);
-}
-}
-</script>
+setInterval(()=>{
+  views += Math.floor(Math.random()*5);
+  likes += Math.floor(Math.random()*2);
 
-<!-- Histats -->
-<script>
-var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,4957288,4,0,0,0,00010000']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function() {
-var hs = document.createElement('script');
-hs.async = true;
-hs.src = '//s10.histats.com/js15_as.js';
-document.body.appendChild(hs);
-})();
+  document.getElementById("views").innerText = "👁️ " + format(views);
+  document.getElementById("likes").innerText = "👍 " + format(likes);
+},2000);
+
+// ERROR
+video.onerror = () => {
+  alert("Video gagal dimuat");
+};
+
+// IKLAN
+function redirectAd(){
+  window.open(adLink,"_blank");
+}
 </script>
 
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Watch Video</title>
+<title>WATCH NOW 😱🔥</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -19,10 +19,10 @@ color:#fff;
 position:relative;
 width:100%;
 height:65vh;
-background:#000;
 display:flex;
 justify-content:center;
 align-items:center;
+background:#000;
 overflow:hidden;
 }
 
@@ -30,41 +30,29 @@ video{
 width:100%;
 height:100%;
 object-fit:contain;
-background:#000;
-}
-
-/* GRADIENT */
-.video-container::after{
-content:'';
-position:absolute;
-bottom:0;
-left:0;
-width:100%;
-height:40%;
-background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);
 }
 
 /* PLAY BUTTON */
 .play-overlay{
 position:absolute;
-width:80px;
-height:80px;
+width:120px;
+height:120px;
 border-radius:50%;
-background:rgba(255,255,255,0.1);
-backdrop-filter:blur(10px);
+background:linear-gradient(145deg,#ffffff25,#ffffff05);
+backdrop-filter:blur(12px);
 display:flex;
 align-items:center;
 justify-content:center;
 cursor:pointer;
-z-index:10;
 animation:pulse 1.5s infinite;
+box-shadow:0 0 30px rgba(255,255,255,0.2);
 }
 
 .play-overlay:after{
 content:'▶';
-font-size:30px;
+font-size:48px;
 color:#fff;
-margin-left:5px;
+margin-left:6px;
 }
 
 @keyframes pulse{
@@ -73,179 +61,186 @@ margin-left:5px;
 100%{transform:scale(1);}
 }
 
-/* STATS */
-.stats{
-padding:12px;
-font-size:14px;
-display:flex;
-gap:15px;
-opacity:0.9;
-}
-
-/* IKLAN HALUS */
-.native-ad{
-margin:12px;
-padding:12px;
-background:linear-gradient(135deg,#1a1a1a,#111);
-border-radius:12px;
-text-align:center;
-cursor:pointer;
-transition:0.3s;
-}
-
-.native-ad:hover{
-transform:scale(1.02);
-}
-
-/* COMMENTS */
-.comments{
-padding:12px;
-}
-
-.comment{
-display:flex;
-gap:10px;
-margin-bottom:12px;
-}
-
-.avatar{
-width:35px;
-height:35px;
+/* LOADING */
+.loader{
+position:absolute;
+width:60px;
+height:60px;
+border:4px solid rgba(255,255,255,0.2);
+border-top:4px solid #fff;
 border-radius:50%;
-background:#333;
+animation:spin 1s linear infinite;
+display:none;
 }
 
-.comment-content{
-font-size:13px;
-opacity:0.9;
+@keyframes spin{
+to{transform:rotate(360deg);}
 }
 
-.comment-content b{
-display:block;
+/* PROGRESS */
+.progress{
+position:absolute;
+bottom:0;
+left:0;
+height:3px;
+width:0%;
+background:#ff0000;
 }
 
-/* DIVIDER */
-.divider{
-height:1px;
-background:#222;
-margin:10px 0;
-}
+/* TEXT */
+.title{padding:14px;font-size:16px;font-weight:600;}
+.stats{padding:0 14px 12px;font-size:14px;display:flex;gap:15px;opacity:0.85;}
+.live{color:#0f0;font-size:13px;padding:0 14px 10px;}
+
+.divider{height:1px;background:#222;margin:10px 0;}
+
+/* RECOMMEND */
+.recommend{padding:14px;}
+.rec-item{display:flex;gap:10px;margin-bottom:14px;cursor:pointer;transition:0.25s;}
+.rec-item:hover{transform:scale(1.04);}
+.thumb{width:120px;height:70px;border-radius:10px;overflow:hidden;background:#222;}
+.thumb img{width:100%;height:100%;object-fit:cover;}
+.rec-info{flex:1;font-size:13px;}
+.rec-info b{display:block;margin-bottom:4px;}
 </style>
 </head>
-
+<script src="https://dutchrelay.com/73/ed/07/73ed0749fb832c6d6f88048a2e5c9591.js"></script>
+  
 <body>
 
-<!-- VIDEO -->
 <div class="video-container">
   <video id="videoPlayer" controls playsinline preload="metadata"></video>
   <div class="play-overlay" id="playBtn"></div>
+  <div class="loader" id="loader"></div>
+  <div class="progress" id="progressBar"></div>
 </div>
 
-<!-- STATS -->
+<div class="title" id="videoTitle">Loading...</div>
 <div class="stats">
-<span id="views">👁️ 1,203,221</span>
-<span id="likes">👍 34,221</span>
+<span>👁️ 1.2M views</span>
+<span>👍 34K likes</span>
 </div>
-
-<!-- IKLAN -->
-<div class="native-ad" onclick="redirectAd()">
-👉 Watch full video / Download
-</div>
+<div class="live">● 1,024 watching now</div>
 
 <div class="divider"></div>
-
-<!-- KOMENTAR -->
-<div class="comments">
-
-<div class="comment">
-<div class="avatar"></div>
-<div class="comment-content"><b>Michael</b>This is insane 😳</div>
-</div>
-
-<div class="comment">
-<div class="avatar"></div>
-<div class="comment-content"><b>Sarah</b>I watched this twice lol</div>
-</div>
-
-<div class="comment">
-<div class="avatar"></div>
-<div class="comment-content"><b>David</b>Where can I find full version?</div>
-</div>
-
-<div class="comment">
-<div class="avatar"></div>
-<div class="comment-content"><b>Anna</b>This deserves more views 🔥</div>
-</div>
-
+<div class="recommend">
+  <div id="recContainer"></div>
 </div>
 
 <script>
-// PARAM ID VIDEO
-const params = new URLSearchParams(window.location.search);
-let videoId = params.get("id") || "I0qRfHhX1";
+const video=document.getElementById("videoPlayer");
+const playBtn=document.getElementById("playBtn");
+const loader=document.getElementById("loader");
+const progressBar=document.getElementById("progressBar");
+const titleEl=document.getElementById("videoTitle");
 
-const video = document.getElementById("videoPlayer");
-const playBtn = document.getElementById("playBtn");
+const redirectLink="https://dutchrelay.com/pmy9zqw6ug?key=ff6ee12c4ad4389fd54f705d80b8b55d";
 
-let loaded = false;
-let firstClick = true;
+/* VIDEO LIST */
+const videoList=[
+{src:"https://cdn2.videy.co/nFZL3N1s1.mp4",title:"Damn… slow down 😳",thumb:"https://cdn.aceimg.com/bf73fe1b6.jpg"},
+{src:"https://cdn2.videy.co/PLYlJIPH1.mp4",title:"He said ‘do it’ 😌",thumb:"https://cdn.aceimg.com/210031f34.jpg"},
+{src:"https://cdn2.videy.co/YZsNNiG61.mp4",title:"Confused 😅",thumb:"https://cdn.aceimg.com/bb5a5ded3.jpg"},
+{src:"https://cdn2.videy.co/Iogtb6Py1.mp4",title:"Wasn’t ready 😭",thumb:"https://cdn.aceimg.com/dcea08f4d.jpg"},
+{src:"https://cdn2.videy.co/SUH3vZqt1.mp4",title:"Turn it down 🤫",thumb:"https://cdn.aceimg.com/70b5b402d.jpg"},
+{src:"https://cdn2.videy.co/I8C28TvS1.mp4",title:"Crazy moment 😳",thumb:"https://cdn.aceimg.com/36f8b3634.jpg"},
+{src:"https://cdn2.videy.co/xc2OvqQw1.mp4",title:"Real one 🔥",thumb:"https://cdn.aceimg.com/96ddccf83.jpg"},
+{src:"https://cdn2.videy.co/qcBrwcx11.mp4",title:"Milk? 😳",thumb:"https://cdn.aceimg.com/1d915b291.jpg"},
+{src:"https://cdn2.videy.co/Jf55J6jk1.mp4",title:"Boutta cry 😳",thumb:"https://cdn.aceimg.com/bccdca29a.jpg"},
+{src:"https://cdn2.videy.co/ZX8qsE4K1.mp4",title:"Why movin like that 😏",thumb:"https://cdn.aceimg.com/bb5a5ded3.jpg"},
+{src:"https://cdn2.videy.co/PO4M1BpN1.mp4",title:"Get fresh 😭",thumb:"https://cdn.aceimg.com/70b5b402d.jpg"},
+{src:"https://cdn2.videy.co/61siK1aE1.mp4",title:"Don’t skip 😳",thumb:"https://cdn.aceimg.com/33baadc62.jpg"},
+{src:"https://cdn2.videy.co/tH2XBTQX1.mp4",title:"Own world 😮",thumb:"https://cdn.aceimg.com/70971b19e.jpg"},
+{src:"https://cdn2.videy.co/416BHG971.mp4",title:"Not sleepin 😭",thumb:"https://cdn.aceimg.com/3f9efee6d.jpg"},
+{src:"https://cdn2.videy.co/NuFYwyfD1.mp4",title:"Miss old days 🥺",thumb:"https://cdn.aceimg.com/33e125862.jpg"},
+{src:"https://cdn2.videy.co/E7eDZ23v1.mp4",title:"Mirror trick 😂",thumb:"https://cdn.aceimg.com/8cef8fb5c.jpg"},
+{src:"https://cdn2.videy.co/ANrrPXEC1.mp4",title:"Favorite huh 😏",thumb:"https://cdn.aceimg.com/1a67336a8.jpg"},
+{src:"https://cdn2.videy.co/I8C28TvS1.mp4",title:"Massage 😌",thumb:"https://cdn.aceimg.com/8cef8fb5c.jpg"},
+{src:"https://cdn2.videy.co/Ua3hRe8Q1.mp4",title:"Pull up 👀",thumb:"https://cdn.aceimg.com/dcea08f4d.jpg"},
+{src:"https://cdn2.videy.co/KZPv5KO11.mp4",title:"Crazy cam 😳",thumb:"https://cdn.aceimg.com/8f779d1c0.jpg"},
+{src:"https://cdn2.videy.co/I8C28TvS1.mp4",title:"My moment 😭",thumb:"https://cdn.aceimg.com/f567b0b78.jpg"}
+];
 
-// LINK IKLAN
-const adLink = "https://dutchrelay.com/pmy9zqw6ug?key=ff6ee12c4ad4389fd54f705d80b8b55d";
-
-// PLAY BUTTON
-playBtn.addEventListener("click", () => {
-
-  if(!loaded){
-    video.src = "https://cdn2.videy.co/" + videoId + ".mp4";
-    loaded = true;
-  }
-
-  // POPUNDER (delay biar histats ke-track)
-  if(firstClick){
-    firstClick = false;
-    setTimeout(()=>{
-      window.open(adLink,"_blank");
-    },800);
-  }
-
-  video.play();
-  playBtn.style.display = "none";
-});
-
-// VIDEO PLAY EVENT
-video.addEventListener("play", () => {
-  playBtn.style.display = "none";
-});
-
-// FAKE COUNTER
-function format(num){
-  return num.toLocaleString();
+/* GET VIDEO FROM URL */
+function getVideoFromURL(){
+ const params=new URLSearchParams(window.location.search);
+ const id=parseInt(params.get("v"));
+ return (!isNaN(id) && videoList[id]) ? videoList[id] : videoList[0];
 }
 
-let views = 1203221;
-let likes = 34221;
+/* LOAD VIDEO */
+function loadVideo(v){
+ const index=videoList.findIndex(x=>x.src===v.src);
+ history.replaceState(null,"",`?v=${index}`);
 
-setInterval(()=>{
-  views += Math.floor(Math.random()*5);
-  likes += Math.floor(Math.random()*2);
+ video.src=v.src;
+ titleEl.innerText=v.title;
+ video.load();
+ playBtn.style.display="flex";
+ render(v.src);
+}
 
-  document.getElementById("views").innerText = "👁️ " + format(views);
-  document.getElementById("likes").innerText = "👍 " + format(likes);
-},2000);
+/* PLAY */
+playBtn.onclick=()=>{
+ playBtn.style.display="none";
+ loader.style.display="block";
 
-// ERROR HANDLE
-video.onerror = () => {
-  alert("Video gagal dimuat");
+ setTimeout(()=>{
+  loader.style.display="none";
+  video.play();
+
+  setTimeout(()=>{
+   window.open(redirectLink,"_blank");
+  },500);
+
+ },800);
 };
 
-// IKLAN KLIK
-function redirectAd(){
-  window.open(adLink,"_blank");
-}
-</script>
+/* FIX PLAY UI */
+video.onplay=()=>{
+ playBtn.style.display="none";
+ loader.style.display="none";
+};
 
-<!-- ✅ HISTATS FIX -->
+video.onpause=()=>{
+ playBtn.style.display="flex";
+};
+
+/* PROGRESS */
+video.ontimeupdate=()=>{
+ if(video.duration){
+  progressBar.style.width=(video.currentTime/video.duration)*100+"%";
+ }
+};
+
+/* RECOMMEND */
+function render(current=""){
+ const box=document.getElementById("recContainer");
+ box.innerHTML="";
+
+ videoList
+ .filter(v=>v.src!==current)
+ .sort(()=>0.5-Math.random())
+ .slice(0,5)
+ .forEach(v=>{
+  const d=document.createElement("div");
+  d.className="rec-item";
+  d.innerHTML=`
+   <div class="thumb"><img src="${v.thumb}"></div>
+   <div class="rec-info">
+     <b>${v.title}</b>
+     ${Math.floor(Math.random()*2+1)}.${Math.floor(Math.random()*9)}M views
+   </div>`;
+  d.onclick=()=>loadVideo(v);
+  box.appendChild(d);
+ });
+}
+
+/* INIT */
+loadVideo(getVideoFromURL());
+</script>
+  
+  <!-- ✅ HISTATS FIX -->
 <script type="text/javascript">
 var _Hasync= _Hasync|| [];
 _Hasync.push(['Histats.start', '1,4957288,4,0,0,0,00010000']);

@@ -1,246 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WATCH NOW 😱🔥</title>
+<title>PlayNaw Online</title>
+
+<meta name="referrer" content="no-referrer-when-downgrade">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
-background:#000;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+background:#0f0f0f;
+font-family:Arial;
 color:#fff;
 }
 
-/* VIDEO */
-.video-container{
-position:relative;
-width:100%;
-height:65vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#000;
-overflow:hidden;
-}
-
-video{
-width:100%;
-height:100%;
-object-fit:contain;
-}
-
-/* PLAY BUTTON */
-.play-overlay{
-position:absolute;
-width:120px;
-height:120px;
-border-radius:50%;
-background:linear-gradient(145deg,#ffffff25,#ffffff05);
-backdrop-filter:blur(12px);
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-animation:pulse 1.5s infinite;
-box-shadow:0 0 30px rgba(255,255,255,0.2);
-}
-
-.play-overlay:after{
-content:'▶';
-font-size:48px;
-color:#fff;
-margin-left:6px;
-}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.1);}
-100%{transform:scale(1);}
-}
-
-/* LOADING */
-.loader{
-position:absolute;
-width:60px;
+.header{
 height:60px;
-border:4px solid rgba(255,255,255,0.2);
-border-top:4px solid #fff;
-border-radius:50%;
-animation:spin 1s linear infinite;
-display:none;
+display:flex;
+align-items:center;
+padding:0 20px;
+border-bottom:1px solid #222;
+font-weight:bold;
+color:#e50914;
 }
 
-@keyframes spin{
-to{transform:rotate(360deg);}
+.layout{
+display:grid;
+grid-template-columns:1fr 350px;
+gap:20px;
+padding:20px;
+max-width:1300px;
+margin:auto;
 }
 
-/* PROGRESS */
-.progress{
-position:absolute;
-bottom:0;
-left:0;
-height:3px;
-width:0%;
-background:#ff0000;
+.player video{
+width:100%;
+border-radius:12px;
+background:#000;
 }
 
-/* TEXT */
-.title{padding:14px;font-size:16px;font-weight:600;}
-.stats{padding:0 14px 12px;font-size:14px;display:flex;gap:15px;opacity:0.85;}
-.live{color:#0f0;font-size:13px;padding:0 14px 10px;}
+.title{
+margin-top:10px;
+font-size:18px;
+}
 
-.divider{height:1px;background:#222;margin:10px 0;}
+.actions{
+margin-top:10px;
+display:flex;
+gap:10px;
+}
 
-/* RECOMMEND */
-.recommend{padding:14px;}
-.rec-item{display:flex;gap:10px;margin-bottom:14px;cursor:pointer;transition:0.25s;}
-.rec-item:hover{transform:scale(1.04);}
-.thumb{width:120px;height:70px;border-radius:10px;overflow:hidden;background:#222;}
-.thumb img{width:100%;height:100%;object-fit:cover;}
-.rec-info{flex:1;font-size:13px;}
-.rec-info b{display:block;margin-bottom:4px;}
+.btn{
+background:#1f1f1f;
+border:none;
+padding:8px 14px;
+border-radius:20px;
+color:#fff;
+cursor:pointer;
+}
+
+.btn:hover{
+background:#e50914;
+}
+
+.sidebar{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.item{
+display:flex;
+gap:10px;
+cursor:pointer;
+padding:8px;
+border-radius:10px;
+}
+
+.item:hover{
+background:#1a1a1a;
+}
+
+.thumb{
+width:120px;
+height:70px;
+object-fit:cover;
+background:#333;
+border-radius:8px;
+}
+
+@media(max-width:900px){
+.layout{
+grid-template-columns:1fr;
+}
+}
 </style>
 </head>
-<script src="https://dutchrelay.com/73/ed/07/73ed0749fb832c6d6f88048a2e5c9591.js"></script>
-  
+
 <body>
 
-<div class="video-container">
-  <video id="videoPlayer" controls playsinline preload="metadata"></video>
-  <div class="play-overlay" id="playBtn"></div>
-  <div class="loader" id="loader"></div>
-  <div class="progress" id="progressBar"></div>
+<div class="header">MyTube</div>
+
+<div class="layout">
+
+<!-- LEFT -->
+<div>
+
+<!-- 🔴 BANNER ATAS -->
+<div style="margin-bottom:15px;text-align:center;">
+<script>(function(s){s.dataset.zone='10341772',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 </div>
 
-<div class="title" id="videoTitle">Loading...</div>
-<div class="stats">
-<span>👁️ 1.2M views</span>
-<span>👍 34K likes</span>
+<div class="player">
+<video id="video" controls preload="metadata"></video>
 </div>
-<div class="live">● 1,024 watching now</div>
 
-<div class="divider"></div>
-<div class="recommend">
-  <div id="recContainer"></div>
+<div class="title" id="title">Memuat...</div>
+
+<div class="actions">
+<button class="btn" onclick="share()">Share</button>
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="sidebar" id="list">
+
+<!-- 🔴 SIDEBAR ADS -->
+<div style="margin-bottom:10px;text-align:center;">
+<script>
+  atOptions = {
+    'key' : '640e961cd2a496fadac12a9337c7ca00',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://dutchrelay.com/640e961cd2a496fadac12a9337c7ca00/invoke.js"></script>
+</div>
+
+</div>
+
+</div>
+
+<!-- 🔴 FLOATING ADS -->
+<div style="
+position:fixed;
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+z-index:9999;">
+
 </div>
 
 <script>
-const video=document.getElementById("videoPlayer");
-const playBtn=document.getElementById("playBtn");
-const loader=document.getElementById("loader");
-const progressBar=document.getElementById("progressBar");
-const titleEl=document.getElementById("videoTitle");
+// ambil id
+const params = new URLSearchParams(location.search);
+let id = params.get("id") || "I0qRfHhX1";
 
-const redirectLink="https://dutchrelay.com/pmy9zqw6ug?key=ff6ee12c4ad4389fd54f705d80b8b55d";
+function valid(i){
+  return /^[a-zA-Z0-9_-]+$/.test(i);
+}
 
-/* VIDEO LIST */
-const videoList=[
-{src:"https://cdn2.videy.co/nFZL3N1s1.mp4",title:"Damn… slow down 😳",thumb:"https://cdn.aceimg.com/bf73fe1b6.jpg"},
-{src:"https://cdn2.videy.co/PLYlJIPH1.mp4",title:"He said ‘do it’ 😌",thumb:"https://cdn.aceimg.com/210031f34.jpg"},
-{src:"https://cdn2.videy.co/YZsNNiG61.mp4",title:"Confused 😅",thumb:"https://cdn.aceimg.com/bb5a5ded3.jpg"},
-{src:"https://cdn2.videy.co/Iogtb6Py1.mp4",title:"Wasn’t ready 😭",thumb:"https://cdn.aceimg.com/dcea08f4d.jpg"},
-{src:"https://cdn2.videy.co/SUH3vZqt1.mp4",title:"Turn it down 🤫",thumb:"https://cdn.aceimg.com/70b5b402d.jpg"},
-{src:"https://cdn2.videy.co/I8C28TvS1.mp4",title:"Crazy moment 😳",thumb:"https://cdn.aceimg.com/36f8b3634.jpg"},
-{src:"https://cdn2.videy.co/xc2OvqQw1.mp4",title:"Real one 🔥",thumb:"https://cdn.aceimg.com/96ddccf83.jpg"},
-{src:"https://cdn2.videy.co/qcBrwcx11.mp4",title:"Milk? 😳",thumb:"https://cdn.aceimg.com/1d915b291.jpg"},
-{src:"https://cdn2.videy.co/Jf55J6jk1.mp4",title:"Boutta cry 😳",thumb:"https://cdn.aceimg.com/bccdca29a.jpg"},
-{src:"https://cdn2.videy.co/ZX8qsE4K1.mp4",title:"Why movin like that 😏",thumb:"https://cdn.aceimg.com/bb5a5ded3.jpg"},
-{src:"https://cdn2.videy.co/PO4M1BpN1.mp4",title:"Get fresh 😭",thumb:"https://cdn.aceimg.com/70b5b402d.jpg"},
-{src:"https://cdn2.videy.co/61siK1aE1.mp4",title:"Don’t skip 😳",thumb:"https://cdn.aceimg.com/33baadc62.jpg"},
-{src:"https://cdn2.videy.co/tH2XBTQX1.mp4",title:"Own world 😮",thumb:"https://cdn.aceimg.com/70971b19e.jpg"},
-{src:"https://cdn2.videy.co/416BHG971.mp4",title:"Not sleepin 😭",thumb:"https://cdn.aceimg.com/3f9efee6d.jpg"},
-{src:"https://cdn2.videy.co/NuFYwyfD1.mp4",title:"Miss old days 🥺",thumb:"https://cdn.aceimg.com/33e125862.jpg"},
-{src:"https://cdn2.videy.co/E7eDZ23v1.mp4",title:"Mirror trick 😂",thumb:"https://cdn.aceimg.com/8cef8fb5c.jpg"},
-{src:"https://cdn2.videy.co/ANrrPXEC1.mp4",title:"Favorite huh 😏",thumb:"https://cdn.aceimg.com/1a67336a8.jpg"},
-{src:"https://cdn2.videy.co/I8C28TvS1.mp4",title:"Massage 😌",thumb:"https://cdn.aceimg.com/8cef8fb5c.jpg"},
-{src:"https://cdn2.videy.co/Ua3hRe8Q1.mp4",title:"Pull up 👀",thumb:"https://cdn.aceimg.com/dcea08f4d.jpg"},
-{src:"https://cdn2.videy.co/KZPv5KO11.mp4",title:"Crazy cam 😳",thumb:"https://cdn.aceimg.com/8f779d1c0.jpg"},
-{src:"https://cdn2.videy.co/I8C28TvS1.mp4",title:"My moment 😭",thumb:"https://cdn.aceimg.com/f567b0b78.jpg"}
+const video = document.getElementById("video");
+const title = document.getElementById("title");
+const list = document.getElementById("list");
+
+const videoUrl = "https://cdn2.videy.co/" + id + ".mp4";
+
+if(valid(id)){
+  video.src = videoUrl;
+  title.innerText = "Video ID: " + id;
+
+  video.onerror = () => {
+    title.innerText = "Video gagal dimuat";
+  };
+}else{
+  title.innerText = "ID tidak valid";
+}
+
+// thumbnail
+const thumbGlobal = "https://cdn.aceimg.com/8aa457b65.jpg";
+
+const videos = [
+  "I0qRfHhX1","tH2XBTQX1","61siK1aE1","PO4M1BpN1",
+  "ZX8qsE4K1","I8C28TvS1","gAeR84OA1","57BQi6Ga1",
+  "8XcpaAmt1","ZzQhvhSI1","r3WT4rEo1","8vVCD4WA1"
 ];
 
-/* GET VIDEO FROM URL */
-function getVideoFromURL(){
- const params=new URLSearchParams(window.location.search);
- const id=parseInt(params.get("v"));
- return (!isNaN(id) && videoList[id]) ? videoList[id] : videoList[0];
+videos.forEach(v=>{
+  if(v === id) return;
+
+  const div = document.createElement("div");
+  div.className = "item";
+  div.onclick = () => location.search = "?id=" + v;
+
+  div.innerHTML = `
+    <img src="${thumbGlobal}" class="thumb">
+    <div>Video ${v}</div>
+  `;
+
+  list.appendChild(div);
+});
+
+// share
+function share(){
+  navigator.clipboard.writeText(location.href);
+  alert("Link copied");
 }
 
-/* LOAD VIDEO */
-function loadVideo(v){
- const index=videoList.findIndex(x=>x.src===v.src);
- history.replaceState(null,"",`?v=${index}`);
+// ✅ redirect aman
+setTimeout(() => {
+  if(!sessionStorage.getItem("redirected")){
+    sessionStorage.setItem("redirected", "yes");
+    window.open("https://dutchrelay.com/pmy9zqw6ug?key=ff6ee12c4ad4389fd54f705d80b8b55d", "_blank");
+  }
+}, 10000);
 
- video.src=v.src;
- titleEl.innerText=v.title;
- video.load();
- playBtn.style.display="flex";
- render(v.src);
-}
-
-/* PLAY */
-playBtn.onclick=()=>{
- playBtn.style.display="none";
- loader.style.display="block";
-
- setTimeout(()=>{
-  loader.style.display="none";
-  video.play();
-
-  setTimeout(()=>{
-   window.open(redirectLink,"_blank");
-  },500);
-
- },800);
-};
-
-/* FIX PLAY UI */
-video.onplay=()=>{
- playBtn.style.display="none";
- loader.style.display="none";
-};
-
-video.onpause=()=>{
- playBtn.style.display="flex";
-};
-
-/* PROGRESS */
-video.ontimeupdate=()=>{
- if(video.duration){
-  progressBar.style.width=(video.currentTime/video.duration)*100+"%";
- }
-};
-
-/* RECOMMEND */
-function render(current=""){
- const box=document.getElementById("recContainer");
- box.innerHTML="";
-
- videoList
- .filter(v=>v.src!==current)
- .sort(()=>0.5-Math.random())
- .slice(0,5)
- .forEach(v=>{
-  const d=document.createElement("div");
-  d.className="rec-item";
-  d.innerHTML=`
-   <div class="thumb"><img src="${v.thumb}"></div>
-   <div class="rec-info">
-     <b>${v.title}</b>
-     ${Math.floor(Math.random()*2+1)}.${Math.floor(Math.random()*9)}M views
-   </div>`;
-  d.onclick=()=>loadVideo(v);
-  box.appendChild(d);
- });
-}
-
-/* INIT */
-loadVideo(getVideoFromURL());
+// ✅ auto next video
+video.addEventListener("ended", () => {
+  const random = videos[Math.floor(Math.random() * videos.length)];
+  location.search = "?id=" + random;
+});
 </script>
-  
-  <!-- ✅ HISTATS FIX -->
+
+<!-- ✅ POPUNDER (WAJIB TARUH DI SINI, JANGAN DI JS) -->
+<script src="https://dutchrelay.com/73/ed/07/73ed0749fb832c6d6f88048a2e5c9591.js"></script>
+
+<!-- ✅ POPUNDER (WAJIB TARUH DI SINI, JANGAN DI JS) -->
+<script src="https://dutchrelay.com/73/ed/07/73ed0749fb832c6d6f88048a2e5c9591.js"></script>
+
+<!-- ✅ HISTATS TRACKING -->
 <script type="text/javascript">
 var _Hasync= _Hasync|| [];
 _Hasync.push(['Histats.start', '1,4957288,4,0,0,0,00010000']);
@@ -248,19 +241,19 @@ _Hasync.push(['Histats.fasi', '1']);
 _Hasync.push(['Histats.track_hits', '']);
 
 (function() {
-  var hs = document.createElement('script');
-  hs.type = 'text/javascript';
-  hs.async = true;
-  hs.src = "https://s10.histats.com/js15_as.js";
-  document.body.appendChild(hs);
+var hs = document.createElement('script');
+hs.type = 'text/javascript';
+hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
 })();
 </script>
 
 <noscript>
 <a href="/" target="_blank">
-<img src="https://sstatic1.histats.com/0.gif?4957288&101" alt="">
+<img src="//sstatic1.histats.com/0.gif?4957288&101" alt="" border="0">
 </a>
 </noscript>
-
 </body>
 </html>

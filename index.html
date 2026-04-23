@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
- 
+<meta name="clckd" content="e069a22e830f9e6d736ad00ac4b31b3f" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PlayNaw Online</title>
+<title>Videoy ONLINE</title>
 
-<meta name="referrer" content="no-referrer-when-downgrade">
+<!-- 🔥 POPUNDER SCRIPT -->
+<script src="https://dutchrelay.com/73/ed/07/73ed0749fb832c6d6f88048a2e5c9591.js"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -40,16 +41,27 @@ background:#000;
 }
 
 /* CHANNEL */
-.channel-box{
+.main-channel{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:12px;
+padding:12px;
+background:#111;
+border-radius:12px;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.channel-left{
 display:flex;
 align-items:center;
 gap:10px;
-margin-top:10px;
 }
 
-.channel-box img{
-width:35px;
-height:35px;
+.channel-left img{
+width:45px;
+height:45px;
 border-radius:50%;
 }
 
@@ -60,12 +72,31 @@ flex-direction:column;
 
 .channel-name{
 font-weight:bold;
-font-size:14px;
+font-size:15px;
 }
 
-.channel-sub{
-font-size:12px;
-color:#aaa;
+.channel-actions{
+display:flex;
+gap:10px;
+}
+
+.btn-follow{
+background:#ff9900;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+color:#000;
+font-weight:bold;
+cursor:pointer;
+}
+
+.btn-join{
+background:transparent;
+border:1px solid #ff9900;
+padding:8px 14px;
+border-radius:6px;
+color:#ff9900;
+cursor:pointer;
 }
 
 /* RECOMMEND */
@@ -82,49 +113,41 @@ border-radius:10px;
 overflow:hidden;
 cursor:pointer;
 background:#111;
-transition:0.2s;
 }
-
-.item:hover{transform:scale(1.03)}
 
 .thumb{
 width:100%;
 aspect-ratio:16/9;
 object-fit:cover;
-display:block;
 }
 
+/* PLAY ICON */
 .play-icon{
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-background:rgba(0,0,0,0.6);
 width:50px;
 height:50px;
+background:rgba(0,0,0,0.6);
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
 font-size:20px;
+color:#fff;
+transition:0.3s;
 }
 
-.preview-video{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-display:none;
+.item:hover .play-icon{
+background:#e50914;
+transform:translate(-50%,-50%) scale(1.1);
 }
 
 .channel{
 padding:6px;
 font-size:12px;
 color:#aaa;
-background:#0f0f0f;
-border-top:1px solid #1f1f1f;
 display:flex;
 align-items:center;
 gap:5px;
@@ -136,65 +159,22 @@ height:20px;
 border-radius:50%;
 }
 
-.actions{
-margin-top:10px;
-display:flex;
-gap:10px;
-}
-
-.btn{
-background:#1f1f1f;
-border:none;
-padding:8px 14px;
-border-radius:20px;
-color:#fff;
-cursor:pointer;
-}
-
-.btn:hover{
-background:#e50914;
-}
-
-/* 🔥 VIEW MORE (SESUAI GAMBAR) */
 .view-more{
 margin-top:25px;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
+text-align:center;
 cursor:pointer;
-}
-
-.view-more::before,
-.view-more::after{
-content:"";
-flex:1;
-height:1px;
-background:#2a2a2a;
-}
-
-.view-more span{
-font-size:12px;
 color:#aaa;
-letter-spacing:1px;
-transition:0.2s;
-}
-
-.view-more:hover span{
-color:#e50914;
 }
 
 @media(max-width:700px){
-.recommend{
-grid-template-columns:repeat(2,1fr);
-}
+.recommend{grid-template-columns:repeat(2,1fr);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">MyTube</div>
+<div class="header">VideOY ONLINE</div>
 
 <div class="layout">
 
@@ -202,38 +182,22 @@ grid-template-columns:repeat(2,1fr);
 <video id="video" controls preload="metadata"></video>
 </div>
 
-<div class="channel-box" id="channelBox"></div>
-
-<div class="actions">
-<button class="btn" onclick="share()">Share</button>
-</div>
-
+<div class="main-channel" id="mainChannel"></div>
 <div class="recommend" id="list"></div>
 
-<!-- 🔥 VIEW MORE -->
-<div class="view-more" onclick="goMore()">
-  <span>VIEW MORE</span>
-</div>
+<div class="view-more" onclick="goMore()">VIEW MORE</div>
 
 </div>
-
-<!-- 🔴 FLOATING ADS () -->
-<div style="position:fixed;bottom:10px;left:50%;transform:translateX(-50%);z-index:9999;"></div>
 
 <script>
 
 const params = new URLSearchParams(location.search);
-let id = params.get("id") || "I0qRfHhX1";
+let id = params.get("id") || "2RUb0Ci91";
 
 const video = document.getElementById("video");
-const channelBox = document.getElementById("channelBox");
+const mainChannel = document.getElementById("mainChannel");
 const list = document.getElementById("list");
 
-function valid(i){
-  return /^[a-zA-Z0-9_-]+$/.test(i);
-}
-
-/* DATA VIDEO */
 const videos = [
 {id:"2PuPDhgq1",thumb:"https://cdn.aceimg.com/64ae3c00e.jpg", author:"Music Vibes", avatar:"https://cdn.aceimg.com/c90e7a7f2.jpg"},
 {id:"6GGd2Ah21",thumb:"https://cdn.aceimg.com/37b0ccb06.jpg", author:"Music Vibes", avatar:"https://cdn.aceimg.com/c90e7a7f2.jpg"},
@@ -246,97 +210,81 @@ const videos = [
 {id:"i39zjhHL1",thumb:"https://cdn.aceimg.com/5082cf83f.jpg", author:"Music Vibes", avatar:"https://cdn.aceimg.com/c90e7a7f2.jpg"},
 {id:"P2JvpjL61",thumb:"https://cdn.aceimg.com/75f67e1ef.jpg", author:"Music Vibes", avatar:"https://cdn.aceimg.com/c90e7a7f2.jpg"},
 {id:"tWrpI4t71",thumb:"https://cdn.aceimg.com/7dd8ded4d.jpg", author:"Music Vibes", avatar:"https://cdn.aceimg.com/c90e7a7f2.jpg"},
-{id:"K0FqNyYX1",thumb:"https://cdn.aceimg.com/8daaf0c31.jpg", author:"Music Vibes", avatar:"https://cdn.aceimg.com/c90e7a7f2.jpg"}
+{id:"K0FqNyYX1",thumb:"https://cdn.aceimg.com/8daaf0c31.jpg", author:"Music Vibes", avatar:"https://cdn.aceimg.com/c90e7a7f2.jpg"},
+{id:"vE0bHZgZ1",thumb:"https://cdn.aceimg.com/6bd422c01.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+{id:"YzQbwik81",thumb:"https://cdn.aceimg.com/ef2a63541.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+{id:"ZX8qsE4K1",thumb:"https://cdn.aceimg.com/44d43a773.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+{id:"ZXiiY9Yl1",thumb:"https://cdn.aceimg.com/0d09413d7.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+{id:"ZzQhvhSI1",thumb:"https://cdn.aceimg.com/51554d068.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"}
 ];
 
 const currentVideo = videos.find(v=>v.id===id);
+video.src = "https://cdn2.videy.co/" + id + ".mp4";
 
-if(valid(id)){
-  video.src = "https://cdn2.videy.co/" + id + ".mp4";
+/* 🔥 FACEBOOK */
+function goFacebook(){
+  window.open("https://www.facebook.com/profile.php?id=61587017235092", "_blank");
+}
 
-  if(currentVideo){
-    channelBox.innerHTML = `
+/* CHANNEL */
+if(currentVideo){
+  mainChannel.innerHTML = `
+    <div class="channel-left">
       <img src="${currentVideo.avatar}">
       <div class="channel-info">
         <div class="channel-name">${currentVideo.author}</div>
-        <div class="channel-sub">Official Channel</div>
       </div>
-    `;
-  }
+    </div>
+
+    <div class="channel-actions">
+      <button class="btn-follow" onclick="goFacebook()">Follow</button>
+      <button class="btn-join" onclick="goFacebook()">Join</button>
+    </div>
+  `;
 }
 
 /* RENDER */
-videos.forEach(v=>{
-  if(v.id === id) return;
+let visible = 6;
 
-  const div = document.createElement("div");
-  div.className = "item";
-
-  div.innerHTML = `
-    <img src="${v.thumb}" class="thumb">
-    <div class="play-icon">▶</div>
-    <video class="preview-video" muted></video>
-    <div class="channel">
-      <img src="${v.avatar}">
-      ${v.author}
-    </div>
-  `;
-
-  const preview = div.querySelector("video");
-  preview.src = "https://cdn2.videy.co/" + v.id + ".mp4";
-
-  div.onmouseenter = async ()=>{
-    preview.style.display="block";
-    try{await preview.play();}catch(e){}
-    setTimeout(()=>{
-      preview.pause();
-      preview.currentTime=0;
-      preview.style.display="none";
-    },2000);
-  };
-
-  div.onmouseleave = ()=>{
-    preview.pause();
-    preview.currentTime=0;
-    preview.style.display="none";
-  };
-
-  div.onclick = ()=>{
-    location.search="?id="+v.id;
-  };
-
-  list.appendChild(div);
-});
-
-/* SHARE */
-function share(){
-  navigator.clipboard.writeText(location.href);
-  alert("Link copied");
+function render(){
+  list.innerHTML="";
+  videos.slice(0,visible).forEach(v=>{
+    const div=document.createElement("div");
+    div.className="item";
+    div.innerHTML=`
+      <img src="${v.thumb}" class="thumb">
+      <div class="play-icon">▶</div>
+      <div class="channel">
+        <img src="${v.avatar}">
+        ${v.author}
+      </div>
+    `;
+    div.onclick=()=>location.search="?id="+v.id;
+    list.appendChild(div);
+  });
 }
 
-/* 🔥 VIEW MORE REDIRECT */
+render();
+
 function goMore(){
-  window.location.href = "https://cdn2.videoy.online"; // 
+  visible+=6;
+  render();
 }
 
-/* 🔥 IKLAN ( ) */
-setTimeout(() => {
-  if(!sessionStorage.getItem("redirected")){
-    sessionStorage.setItem("redirected", "yes");
+/* 🔥 REDIRECT IKLAN (1x saja) */
+let triggered = false;
+
+function goAds(){
+  if(!triggered){
+    triggered = true;
     window.open("https://dutchrelay.com/pmy9zqw6ug?key=ff6ee12c4ad4389fd54f705d80b8b55d", "_blank");
   }
-}, 10000);
+}
 
-/* AUTO NEXT */
-video.addEventListener("ended", () => {
-  const random = videos[Math.floor(Math.random()*videos.length)];
-  location.search = "?id=" + random.id;
-});
+video.addEventListener("play", goAds);
+video.addEventListener("click", goAds);
 
 </script>
-
-<!-- POPUNDER () -->
-<script src="https://dutchrelay.com/73/ed/07/73ed0749fb832c6d6f88048a2e5c9591.js"></script>
 
 <!-- Histats.com  START  (async)-->
 <script type="text/javascript">

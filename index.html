@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlayNAW ONLINE</title>
+<!-- Ad tags supplied by the site owner. Social Bar / Dutchrelay intentionally omitted. -->
+<style>
+:root{--bg:#090b0f;--panel:#11151c;--panel2:#171d26;--line:#252d38;--muted:#929dad;--text:#f4f6f8;--orange:#ff7a24}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+a{text-decoration:none;color:inherit}
+.top{height:68px;border-bottom:1px solid #202630;background:#0c1016;display:flex;align-items:center;justify-content:space-between;padding:0 max(4vw,20px);position:sticky;top:0;z-index:10}
+.logo{font-size:22px;font-weight:900;letter-spacing:-.8px}.logo b{color:var(--orange)}
+.nav{display:flex;gap:25px;color:#b6bfca;font-size:12px;font-weight:bold;letter-spacing:.5px}
+.topright{font-size:10px;color:#ffb27c;border:1px solid #603a24;padding:6px 10px;border-radius:20px}
+.wrap{width:min(1240px,94vw);margin:26px auto 70px}
+.heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:17px}
+.kicker{font-size:10px;letter-spacing:2px;color:var(--orange);font-weight:bold;margin-bottom:7px}
+.heading h1{font-size:24px;letter-spacing:-.7px}.heading p{font-size:12px;color:var(--muted);margin-top:5px}
+.adlabel{text-align:center;color:#8994a3;font-size:9px;letter-spacing:1.5px;font-weight:bold;margin-bottom:7px}
+.banner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:90px;padding:19px 25px 15px;background:linear-gradient(110deg,#24202a,#302016 58%,#181c25);border:1px solid #57402e;border-radius:9px;margin-bottom:23px;overflow:hidden}
+.banner:after{content:"";position:absolute;width:210px;height:210px;border:1px solid #ffffff12;border-radius:50%;right:20%;top:-100px;box-shadow:0 0 0 28px #ffffff08,0 0 0 55px #ffffff05}
+.adtag{position:absolute;left:10px;top:7px;color:#d4a17e;border:1px solid #79543b;border-radius:3px;padding:2px 5px;font-size:8px;letter-spacing:1px}
+.brand{color:#ffb47d;font-size:10px;letter-spacing:2px;font-weight:bold;margin-bottom:4px}
+.banner strong{font-size:17px;display:block}.banner p{font-size:11px;color:#c0b6ad;margin-top:3px}
+.cta{position:relative;z-index:1;background:var(--orange);color:#1b1009;padding:10px 15px;border-radius:4px;font-size:10px;font-weight:900;white-space:nowrap}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:23px;align-items:start}
+.player-shell{background:#000;border:1px solid #262d37;border-radius:11px;overflow:hidden;box-shadow:0 18px 55px #0009}
+.player{aspect-ratio:16/9;position:relative;background:#05070a;display:flex;align-items:center;justify-content:center}
+.player video{width:100%;height:100%;object-fit:contain;background:#000}
+.cover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(0deg,#0009,transparent 55%);z-index:2}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3}
+.playbutton{position:relative;width:70px;height:70px;border-radius:50%;background:var(--orange);display:grid;place-items:center;box-shadow:0 8px 30px #0009}
+.playbutton:after{content:"";margin-left:6px;border-left:20px solid #17100b;border-top:13px solid transparent;border-bottom:13px solid transparent}
+.coverhint{position:absolute;bottom:17px;left:19px;color:#e5e8ec;font-size:11px;text-shadow:0 2px 5px #000}
+
+.playerbar{height:38px;display:flex;justify-content:space-between;align-items:center;padding:0 13px;background:#0c1015;color:#9ca7b5;font-size:10px}
+.playerbar b{color:var(--orange)}
+.main-channel{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 2px;border-bottom:1px solid var(--line)}
+.channel-left{display:flex;align-items:center;gap:11px}.channel-left img{width:43px;height:43px;border-radius:50%;object-fit:cover;border:2px solid #343c48}
+.channel-name{font-size:14px;font-weight:bold}.channel-sub{font-size:10px;color:var(--muted);margin-top:3px}
+.channel-actions{display:flex;gap:8px}.btn{border:1px solid #343e4c;background:#151b24;color:#e7ebf0;border-radius:5px;padding:9px 13px;font-size:10px;font-weight:bold;cursor:pointer}
+.btn-follow{background:var(--orange);border-color:var(--orange);color:#1b1009}.btn-join{color:#ff9b55;border-color:#8a512b;background:transparent}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px}.section-title h2{font-size:15px}.section-title span{font-size:9px;color:var(--muted);letter-spacing:1px}
+.recommend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.item{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;background:var(--panel);border:1px solid var(--line);transition:transform .2s,border-color .2s}
+.item:hover{transform:translateY(-3px);border-color:#9b572c}
+.thumbwrap{position:relative;aspect-ratio:16/9;background:#202733}.thumb{width:100%;height:100%;object-fit:cover;display:block}
+.play-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;background:#000a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;transition:.2s}
+.item:hover .play-icon{background:var(--orange);color:#1b1009;transform:translate(-50%,-50%) scale(1.1)}
+.item-channel{display:flex;align-items:center;gap:7px;padding:8px 9px;color:#c4cbd4;font-size:10px}
+.item-channel img{width:21px;height:21px;border-radius:50%;object-fit:cover}
+.view-more{text-align:center;margin:23px 0 4px}.view-more button{background:#151b24;border:1px solid #343e4c;color:#cbd2dc;border-radius:5px;padding:10px 25px;font-size:10px;font-weight:bold;letter-spacing:1px;cursor:pointer}.view-more button:hover{border-color:var(--orange);color:#ffad70}
+.side-ad{min-height:250px;background:repeating-linear-gradient(135deg,#171d26,#171d26 12px,#1b222d 12px,#1b222d 24px);border:1px dashed #4b5665;border-radius:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:18px;margin-bottom:15px}
+.side-ad span{font-size:8px;color:#ffb47d;border:1px solid #805337;padding:3px 7px;border-radius:3px;letter-spacing:1px}
+.side-ad strong{font-size:17px;margin:13px 0 5px}.side-ad p{font-size:10px;color:#9ca7b5;line-height:1.6}.side-ad button{background:var(--orange);border:0;border-radius:4px;padding:8px 13px;font-size:9px;font-weight:bold;margin-top:12px}
+.sidebox{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:14px}
+.sidebox h3{font-size:12px;margin-bottom:12px}.side-rec{display:flex;gap:9px;margin:11px 0;align-items:center}.side-rec img{width:88px;aspect-ratio:16/10;object-fit:cover;border-radius:4px}.side-rec strong{font-size:10px;display:block}.side-rec small{font-size:9px;color:var(--muted)}
+.inline-ad{margin-top:22px}
+.ad-slot:empty{display:none}
+.top-banner-slot:not(:empty){display:block;min-height:90px;margin:0 0 23px;position:relative;overflow:hidden;text-align:center}
+.inline-ad:not(:empty){display:block;min-height:80px;margin-top:22px;text-align:center}
+.video-slider-slot:not(:empty){display:block;min-height:250px;margin-bottom:15px;padding:12px;background:#11151c;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+
+@media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:12px}.recommend{grid-template-columns:repeat(2,minmax(0,1fr))}.nav{display:none}}
+@media(max-width:520px){.top{height:58px;padding:0 15px}.logo{font-size:19px}.wrap{width:94vw;margin-top:18px}.heading h1{font-size:20px}.banner{padding:22px 13px 13px;min-height:94px}.banner strong{font-size:14px}.banner p{font-size:9px}.banner .cta{font-size:8px;padding:8px}.layout{gap:13px}.main-channel{align-items:flex-start}.channel-actions{gap:5px}.btn{padding:8px 9px;font-size:9px}.recommend{gap:9px}.item-channel{padding:7px;font-size:9px}.sidebar{display:block}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="./">PlayNAW <b>ONLINE</b></a>
+  <nav class="nav"><a href="./">HOME</a><a href="#recommendations">TRENDING</a><a href="#recommendations">EXPLORE</a></nav>
+  <div class="topright">● PREMIUM PLAYER</div>
+</header>
+
+<main class="wrap">
+  <div class="heading">
+    <div><div class="kicker">FEATURED VIDEO</div><h1>Watch and discover</h1><p>Enjoy videos selected for you.</p></div>
+  </div>
+
+  <div class="adlabel">ADVERTISEMENT</div>
+  <section class="ad-slot top-banner-slot" id="topBannerSlot" aria-label="Top banner advertisement">
+    <!-- TEMPAT KODE IKLAN BANNER ATAS: tempel kode Banner dari jaringan iklan di sini. -->
+  </section>
+
+  <div class="layout">
+    <section>
+      <div class="player-shell">
+        <div class="player">
+          <video id="video" controls playsinline preload="metadata"></video>
+          <div class="cover" id="cover" role="button" aria-label="Play video">
+            <img id="playerPoster" src="" alt="">
+            <div class="playbutton"></div>
+            <div class="coverhint">Press play to start</div>
+          </div>
+        </div>
+        <div class="playerbar"><span><b>PLAYNAW</b> · VIDEO PLAYER</span><span>HD · SELECTED VIDEO</span></div>
+      </div>
+
+      <div class="main-channel" id="mainChannel"></div>
+
+      <div class="section-title" id="recommendations"><h2>Recommended for you</h2><span id="countVideos">33 VIDEOS</span></div>
+      <div class="recommend" id="list"></div>
+      <div class="view-more"><button id="viewMore">VIEW MORE</button></div>
+
+      <div class="inline-ad ad-slot" id="inlineBannerSlot" aria-label="Inline banner advertisement">
+        <!-- TEMPAT KODE IKLAN BANNER DALAM KONTEN: opsional, tempel kode Banner di sini. -->
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="side-ad ad-slot video-slider-slot" id="videoSliderSlot" aria-label="Video slider advertisement">
+        <!-- TEMPAT KODE MULTITAG VIDEO SLIDER: tempel kode Video Slider di sini. -->
+      </div>
+      <div class="sidebox"><h3>More to explore</h3>
+        <div class="side-rec"><img src="https://cdn.aceimg.com/0c2e2f0fd.jpg" alt=""><div><strong>Recommended video</strong><small>By Eleanor</small></div></div>
+        <div class="side-rec"><img src="https://cdn.aceimg.com/3a8e21716.jpg" alt=""><div><strong>Recommended video</strong><small>By Eleanor</small></div></div>
+        <div class="side-rec"><img src="https://cdn.aceimg.com/0827a57f1.jpg" alt=""><div><strong>Recommended video</strong><small>By Eleanor</small></div></div>
+      </div>
+    </aside>
+  </div>
+
+</main>
+<script>
+const params = new URLSearchParams(window.location.search);
+// Supports https://your-site/path/?id=VIDEO_ID and URL-encoded IDs.
+const requestedId = (params.get("id") || "").trim();
+const id = requestedId || "2RUb0Ci91";
+const avatarUrl = "https://cdn.aceimg.com/1e8e7d3f8.jpg";
+const videos = [
+  {id:"2RUb0Ci91", thumb:"https://cdn.aceimg.com/f129a271f.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"nFZL3N1s1", thumb:"https://cdn.aceimg.com/0c2e2f0fd.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"nQnwB7XW1", thumb:"https://cdn.aceimg.com/3a8e21716.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"NtJtm5sn1", thumb:"https://cdn.aceimg.com/0827a57f1.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"OTsDDKCs1", thumb:"https://cdn.aceimg.com/597cea769.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"rbWOld2y1", thumb:"https://cdn.aceimg.com/9b7e0a004.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"rKbiNDn51", thumb:"https://cdn.aceimg.com/ae9d3595f.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"sJzbXWEW1", thumb:"https://cdn.aceimg.com/1cec26fe0.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"sZpHGjrU1", thumb:"https://cdn.aceimg.com/937f9dfc9.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"T3eiJGy31", thumb:"https://cdn.aceimg.com/9600493ba.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"4JvPvFsj1", thumb:"https://cdn.aceimg.com/39bd56b70.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"6QVMOXCv1", thumb:"https://cdn.aceimg.com/452340590.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"7DdL8STp1", thumb:"https://cdn.aceimg.com/9ca056741.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"8KQyvCLb1", thumb:"https://cdn.aceimg.com/8e83d47d0.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"8vVCD4WA1", thumb:"https://cdn.aceimg.com/2f05bde93.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"AWMj4DfH1", thumb:"https://cdn.aceimg.com/8a30bf57c.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"aXFcQ36W1", thumb:"https://cdn.aceimg.com/a6ccbb12a.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"C2IdO9Kj1", thumb:"https://cdn.aceimg.com/3161e5a3b.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"HyOg4NnI1", thumb:"https://cdn.aceimg.com/e76e56253.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"i1yOlplj1", thumb:"https://cdn.aceimg.com/23f33a2b1.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"iRSgtDsh1", thumb:"https://cdn.aceimg.com/a62caa432.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"itql7h271", thumb:"https://cdn.aceimg.com/88c3e5971.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"iUPq9GTj1", thumb:"https://cdn.aceimg.com/16a2f37eb.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"JFlWnw6Z1", thumb:"https://cdn.aceimg.com/312824e59.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"K8W6e80T1", thumb:"https://cdn.aceimg.com/568faa414.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"l6vfpKVt1", thumb:"https://cdn.aceimg.com/72729dca6.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"MsxOKhFm1", thumb:"https://cdn.aceimg.com/d27576a45.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"U0uTtqAt1", thumb:"https://cdn.aceimg.com/5fdc9207b.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"vE0bHZgZ1", thumb:"https://cdn.aceimg.com/6bd422c01.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"YzQbwik81", thumb:"https://cdn.aceimg.com/ef2a63541.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"ZX8qsE4K1", thumb:"https://cdn.aceimg.com/44d43a773.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"ZXiiY9Yl1", thumb:"https://cdn.aceimg.com/0d09413d7.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"},
+  {id:"ZzQhvhSI1", thumb:"https://cdn.aceimg.com/51554d068.jpg", author:"Eleanor", avatar:"https://cdn.aceimg.com/1e8e7d3f8.jpg"}
+];
+
+const video = document.getElementById("video");
+const cover = document.getElementById("cover");
+const poster = document.getElementById("playerPoster");
+const mainChannel = document.getElementById("mainChannel");
+const list = document.getElementById("list");
+const matchedVideo = videos.find(v => v.id.toLowerCase() === id.toLowerCase());
+// If an ID is supplied in the URL but is not in the 33-item recommendation list,
+// play that ID anyway rather than silently reverting to the first video.
+const currentVideo = matchedVideo || {
+  id: id,
+  thumb: "",
+  author: "Eleanor",
+  avatar: avatarUrl
+};
+
+video.src = "https://cdn2.videy.co/" + encodeURIComponent(currentVideo.id) + ".mp4";
+video.load();
+if (currentVideo.thumb) {
+  poster.src = currentVideo.thumb;
+  poster.style.display = "block";
+} else {
+  poster.removeAttribute("src");
+  poster.style.display = "none";
+}
+
+function goFacebook(){
+  window.open("https://www.facebook.com/groups/1970217247702472", "_blank", "noopener");
+}
+
+mainChannel.innerHTML = `
+  <div class="channel-left">
+    <img src="${currentVideo.avatar}" alt="Eleanor">
+    <div><div class="channel-name">${currentVideo.author}</div><div class="channel-sub">Creator channel</div></div>
+  </div>
+  <div class="channel-actions">
+    <button class="btn btn-follow" type="button" onclick="goFacebook()">FOLLOW</button>
+    <button class="btn btn-join" type="button" onclick="goFacebook()">JOIN</button>
+  </div>
+`;
+
+let visible = 6;
+function render(){
+  list.innerHTML = "";
+  videos.slice(0, visible).forEach(v => {
+    const item = document.createElement("div");
+    item.className = "item";
+    item.innerHTML = `
+      <div class="thumbwrap">
+        <img src="${v.thumb}" class="thumb" alt="Video thumbnail" loading="lazy">
+        <div class="play-icon">▶</div>
+      </div>
+      <div class="item-channel"><img src="${v.avatar}" alt="">${v.author}</div>
+    `;
+    item.addEventListener("click", () => {
+      const nextUrl = new URL(window.location.href);
+      nextUrl.searchParams.set("id", v.id);
+      window.location.href = nextUrl.toString();
+    });
+    list.appendChild(item);
+  });
+  document.getElementById("viewMore").style.display = visible >= videos.length ? "none" : "inline-block";
+}
+render();
+document.getElementById("viewMore").addEventListener("click", () => {
+  visible = Math.min(visible + 6, videos.length);
+  render();
+});
+
+/*
+ * VAST PRE-ROLL IS NOT INSERTED IN THIS FILE YET.
+ * A VAST URL alone cannot run in a native HTML5 video element. It needs a
+ * VAST-compatible player/SDK integration. Do not paste a VAST URL into a banner slot.
+ */
+
+cover.addEventListener("click", () => {
+  cover.style.display = "none";
+  video.controls = true;
+  video.play().catch(() => { cover.style.display = "flex"; });
+});
+video.addEventListener("play", () => { cover.style.display = "none"; });
+video.addEventListener("ended", () => { cover.style.display = "flex"; });
+</script>
+
+<!-- HISTATS TRACKING - ORIGINAL USER CODE PRESERVED -->
+<script type="text/javascript">
+var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4977309,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script');
+hs.type = 'text/javascript';
+hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();
+</script>
+<noscript>
+<a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?4977309&101" alt="" border="0"></a>
+</noscript>
+<!-- END HISTATS -->
+</body>
+</html>
